@@ -1,6 +1,3 @@
 Flask
 requests
 psycopg2
-pymongo
-black
-python-dotenv
