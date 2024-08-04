@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SoundScene: Discover personalized movie and music recommendations.">
+    <title>SoundScene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <header role="banner">
+        <a href="{{ url_for('main.home') }}">
+            <img src="{{ url_for('static', filename='Pictures/SoundSceneLogo.png') }}" alt="SoundScene Logo" class="soundscenelogo">
+        </a>
+        <a href="{{ url_for('main.home') }}"><h1 id="clicktitle">SoundScene</h1></a>
+        <div class="topnav">
+           
+        </div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="{{ url_for('main.discover_movies') }}">Discover Movies</a></li>
+                <li><a href="{{ url_for('main.discover_music') }}">Discover Music</a></li>
+                <li><a href="{{ url_for('main.discover_community_music') }}">Discover Community Artists</a></li>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                <li><a href="#" id="aboutLink">About</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+    </div>
+</html>

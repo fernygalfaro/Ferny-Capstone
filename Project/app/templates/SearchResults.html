@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - SoundScene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <header role="banner">
+        <a href="{{ url_for('main.home') }}">
+            <img src="{{ url_for('static', filename='Pictures/SoundSceneLogo.png') }}" alt="SoundScene Logo" class="soundscenelogo">
+        </a>
+        <a href="{{ url_for('main.home') }}"><h1 id="clicktitle">SoundScene</h1></a>
+        <div class="topnav">
+            <button id="openSearchBtn" class="search-btn">Search</button>
+        </div>
+        
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="{{ url_for('main.search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Search..." value="{{ request.args.get('query', '') }}">
+                    <div class="dropdown">
+                        <button class="dropbtn">Filter out Genre</button>
+                        <div class="dropdown-content" >
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Action">
+                                <label for="Action">Action</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Animation">
+                                <label for="Animation">Animation</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Adventure">
+                                <label for="Adventure">Adventure</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Comedy">
+                                <label for="Comedy">Comedy</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Horror">
+                                <label for="Horror">Horror</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Fantasy">
+                                <label for="Fantasy">Fantasy</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="Family">
+                                <label for="Family">Family</label>
+                            </div>
+                        </div>
+                      </div>
+                    <button type="submit">Search</button>
+                    <button type="submit">Dont personalize search</button>
+                </form>
+            </div>
+        </div>
+        
+        <nav role="navigation">
+            <ul>
+                <li><a href="{{ url_for('main.discover_movies') }}">Discover Movies</a></li>
+                <li><a href="{{ url_for('main.discover_music') }}">Discover Music</a></li>
+                <li><a href="{{ url_for('main.discover_community_music') }}">Discover Community Artists</a></li>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                <li><a href="#" id="aboutLink">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <h2>Search Results for "{{ query }}"</h2>
+        <div class="search-section">
+            <h3>Movies</h3>
+            <ul class="movie-list">
+                {% for movie in movies %}
+                <li class="movie-item">
+                    <div class="movie-poster-container">
+                        <img src="{{ movie['poster_url'] }}" alt="{{ movie['title'] }} Poster" class="movie-image">
+                        <div class="movie-popup">
+                            <h4>{{ movie['title'] }}</h4>
+                            <p>{{ movie['overview'] }}</p>
+                            <p><b>Genres</b>: {{ movie['genres'] | join(', ') }}</p>
+                            <p><b>Release Date</b>: {{ movie['release_date'] }}</p>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                <li>No movies found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+    </main>
+    <div id="aboutPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>About SoundScene</h2>
+            <p>SoundScene is a media personalization platform that recommends music and shows tailored to individual preferences.
+                There is no bloat content, and any media the user does not want to consume won't be recommended. Major platforms
+                like Spotify, Netflix, and Hulu offer a huge catalog of content, but SoundScene offers only the content that is
+                relevant to the user. SoundScene learns from viewing and listening patterns to recommend the most appropriate content.</p>
+        </div>
+</body>
+</html>

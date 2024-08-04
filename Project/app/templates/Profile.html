@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SoundScene: Complete Your Profile">
+    <title>Complete Your Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header role="banner">
+        <a href="{{ url_for('main.home') }}">
+            <img src="{{ url_for('static', filename='Pictures/SoundSceneLogo.png') }}" alt="SoundScene Logo" class="soundscenelogo">
+        </a>
+        <a href="{{ url_for('main.home') }}"><h1 id="clicktitle">SoundScene</h1></a>
+        <nav role="navigation">
+            <ul>
+                <li><a href="{{ url_for('main.discover_movies') }}">Discover Movies</a></li>
+                <li><a href="{{ url_for('main.discover_music') }}">Discover Music</a></li>
+                <li><a href="{{ url_for('main.discover_community_music') }}">Discover Community Artists</a></li>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                <li><a href="#" id="aboutLink">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-content" role="main">
+        <h2>Complete Your Profile</h2>
+        <form method="POST" action="{{ url_for('auth.profile') }}">
+            <input type="hidden" name="email" value="{{ request.args.get('email', '') }}">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" required>
+            <label for="favorite_movie">Favorite Movie:</label>
+            <input type="text" id="favorite_movie" name="favorite_movie" required>
+            <label for="favorite_band">Favorite Band:</label>
+            <input type="text" id="favorite_band" name="favorite_band" required>
+            <label for="picture">Picture URL:</label>
+            <input type="text" id="picture" name="picture" required>
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+</body>
+</html>
